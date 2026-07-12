@@ -1,130 +1,175 @@
-Mosquito Risk
+# Mosquito Risk
 
-An open-source mosquito risk assessment platform that combines weather intelligence, ecological modeling, and public health awareness to estimate environmental conditions favorable for mosquito population growth.
+An open-source computational framework for climate-informed mosquito risk assessment using biological relationships, weather data, and environmental modeling.
 
-Overview
+## Overview
 
-Mosquito-borne diseases such as Dengue, Malaria, Chikungunya, Zika, and West Nile Virus continue to affect millions of people worldwide. Mosquito Risk was developed to explore how publicly available meteorological data can be transformed into actionable mosquito-risk estimates through biologically informed environmental modeling.
+Mosquito Risk is a research prototype that estimates environmental suitability for mosquito activity by combining published biological knowledge with real-time meteorological data.
 
-The platform integrates temperature, humidity, rainfall, and wind data to generate localized mosquito risk assessments and provide educational insights for users.
+The project demonstrates how climate variables can be translated into a practical mosquito risk estimation framework for research, education, and public awareness.
 
-Key Features
+This repository accompanies the research paper:
 
-- Real-time weather integration using Open-Meteo APIs
-- Environmental mosquito risk assessment
-- Weather-based mosquito activity estimation
-- Public health awareness dashboard
-- Educational mosquito prevention guidance
-- Mobile-friendly Progressive Web App (PWA)
-- Open-source and freely accessible
+**Climate-Driven Mosquito Population Dynamics: An Open-Source Computational Framework for Environmental Mosquito Risk Assessment**
 
-Scientific Foundation
+---
 
-The project is based on established ecological and entomological research regarding:
+## Features
+
+- Real-time weather integration (Open-Meteo API)
+- Temperature-based biological modeling
+- Relative humidity and Vapor Pressure Deficit (VPD)
+- Rainfall accumulation analysis
+- Wind speed behavioral suppression
+- Environmental mosquito risk score
+- Interactive mobile-friendly dashboard
+- Open-source implementation
+
+---
+
+## Scientific Basis
+
+The prototype incorporates research-informed relationships involving:
 
 - Temperature-dependent mosquito development
-- Relative humidity and desiccation resistance
-- Rainfall-driven breeding habitat availability
-- Wind-mediated dispersal dynamics
-- Environmental factors influencing vector competence
+- Extrinsic Incubation Period (EIP)
+- Relative Humidity
+- Vapor Pressure Deficit
+- Rainfall accumulation
+- Wind dispersal
+- Urban Heat Island effects
+- Microclimate ecology
 
-The current system represents a research-informed prototype and framework for future validation studies.
+The framework is intended for environmental mosquito risk estimation rather than disease prediction.
 
-Research Paper
+---
 
-The accompanying paper:
+## Technology Stack
 
-Climate-Driven Mosquito Population Dynamics: An Open-Source Framework for Environmental Mosquito Risk Assessment
+- Flutter
+- Dart
+- Open-Meteo API
+- REST APIs
+- Python (feature engineering)
+- Machine Learning concepts
+- Mathematical modeling
+- Geospatial processing
 
-is available in the repository under:
+---
 
-research-paper/
+## Project Structure
 
-System Architecture
+```
+lib/
+assets/
+api/
+models/
+widgets/
+screens/
+```
 
-Open-Meteo API
-↓
-Weather Processing
-↓
-Biological Engine
-↓
-Risk Score Engine
-↓
-Mosquito Risk Assessment
-↓
-Web Application Dashboard
+---
 
-Technology Stack
+## Research Paper
 
-Frontend:
+The complete research paper is included in this repository.
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
+Title:
 
-Data Sources:
+> Climate-Driven Mosquito Population Dynamics: An Open-Source Computational Framework for Environmental Mosquito Risk Assessment
 
-- Open-Meteo Weather API
+---
 
-Deployment:
+## Live Demo
 
-- Vercel
-
-Live Demo
-
-Website:
 https://mosquito-risk-zeta.vercel.app/
 
-Research Status
+---
 
-Current Stage:
+## Installation
 
-- Literature Review: Complete
-- Biological Framework: Complete
-- Web Prototype: Complete
-- Public Deployment: Complete
-- Historical Validation: In Progress
-- Field Validation: Future Work
+Clone the repository
 
-Limitations
+```bash
+git clone https://github.com/Coderarshil/Mosquito-risk.git
+```
 
-This project is an educational and research-oriented prototype.
+Install dependencies
 
-Current limitations include:
+```bash
+flutter pub get
+```
 
-- No field mosquito surveillance data
-- No clinical outbreak validation
-- Risk scores are based on literature-derived ecological relationships
-- Further validation is required before operational public-health use
+Run
 
-Future Work
+```bash
+flutter run
+```
 
-- Historical dengue outbreak validation
-- Integration of satellite-derived environmental data
-- Machine learning-based forecasting models
-- Community mosquito reporting system
-- Expanded geographic coverage
-- Collaboration with public health researchers
+---
 
-Open Source
+## Future Work
 
-This project is released under the MIT License.
+- Satellite data integration
+- Machine learning training using surveillance datasets
+- Mosquito trapping validation
+- Community reporting
+- Clinical validation
+- GIS expansion
 
-Contributions, suggestions, and scientific discussions are welcome.
+---
 
-Author
+## Limitations
 
-Mohd Arshil
+This project is an experimental prototype.
+
+It:
+
+- does not diagnose disease
+- does not replace mosquito surveillance
+- has not undergone clinical or epidemiological validation
+- is intended for research and educational purposes only
+
+---
+
+## Citation
+
+If you use this work, please cite:
+
+Arshil, M. (2026). *Climate-Driven Mosquito Population Dynamics: An Open-Source Computational Framework for Environmental Mosquito Risk Assessment.*
+
+---
+
+## License
+
+MIT License
+
+---
+
+## Acknowledgements
+
+- Open-Meteo
+- National Institutes of Health (NIH)
+- Frontiers Journals
+- CDC
+- World Mosquito Program
+
+---
+
+## Contact
+
+**Mohd Arshil**
 
 Independent Student Researcher
-Class 12 Student
-Lucknow, Uttar Pradesh, India
 
-Citation
+Lucknow, India
 
-If you use this work in research, educational projects, or derivative applications, please cite the accompanying paper and repository.
+GitHub:
+https://github.com/Coderarshil
 
-Disclaimer
+Email:
+arshilaehmad.2000@gmail.com
 
-This platform is intended for research, education, and public awareness purposes only. It does not provide medical advice, disease diagnosis, or official public health guidance.
+---
+
+⭐ Contributions, feedback, and suggestions are welcome.
