@@ -1463,7 +1463,7 @@ function updateDashboard() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// AI INSIGHT GENERATOR
+// ENVIRONMENTAL INSIGHT GENERATOR
 // ═══════════════════════════════════════════════════════════════════════════
 function generateInsight(temp, humidity, wind, rain, score, level, hour, vpd, pressure) {
   const el = document.getElementById('environmentalInsight');
@@ -1501,70 +1501,19 @@ function generateInsight(temp, humidity, wind, rain, score, level, hour, vpd, pr
     txt += `Low barometric pressure (${pressure} hPa) — storm imminent. Many species exhibit pre-storm feeding bursts. `;
 
   el.innerHTML=''; let i=0;
+
   function type() {
     if (i<txt.length) {
-      el.innerHTML=txt.substring(0,i+1)+'<span class="ai-typing"></span>';
-      i+=4; requestAnimationFrame(()=>setTimeout(type,8));
-    } else el.innerHTML=txt;
+      el.innerHTML=txt.substring(0,i+1)+'<span class="environmental-typing"></span>';
+      i+=4;
+      requestAnimationFrame(()=>setTimeout(type,8));
+    } else {
+      el.innerHTML=txt;
+    }
   }
+
   type();
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// FORECAST (7-DAY and 30-DAY)
-// ═══════════════════════════════════════════════════════════════════════════
-function setForecastRange(n) {
-  _forecastRange = n;
-  document.getElementById('fBtn7').classList.toggle('active',  n===7);
-  document.getElementById('fBtn30').classList.toggle('active', n===30);
-  document.getElementById('forecastCardTitle').textContent = n===7?'7-Day Forecast':'30-Day Projection';
-  updateForecast();
-}
-
-function updateForecast() {
-  const container = document.getElementById('forecastScroll');
-  const src = _forecastRange === 30 ? (window._forecast30||forecastData) : forecastData;
-  if (!src||!src.list||src.list.length===0) return;
-
-  const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const today    = new Date().toISOString().split('T')[0];
-
-  const dailyMap = {};
-  src.list.forEach(item => {
-    const date = item._date || item.dt_txt.split(' ')[0];
-    if (!dailyMap[date]) dailyMap[date] = { items:[], _projected: !!item._projected };
-    dailyMap[date].items.push(item);
-  });
-
-  const days = Object.keys(dailyMap).slice(0, _forecastRange);
-  container.innerHTML = days.map((date, idx) => {
-    const group = dailyMap[date].items;
-    const avgTemp  = group.reduce((s,d)=>s+d.main.temp,0)/group.length;
-    const maxTemp  = Math.max(...group.map(d=>d.main.temp_max||d.main.temp));
-    const minTemp  = Math.min(...group.map(d=>d.main.temp_min||d.main.temp));
-    const avgHum   = group.reduce((s,d)=>s+d.main.humidity,0)/group.length;
-    const avgWind  = group.reduce((s,d)=>s+d.wind.speed,0)/group.length;
-    const totalRain= group.reduce((s,d)=>s+(d.rain['3h']||0),0);
-    const wcode    = group[0]._weatherCode||0;
-    const risk     = calculateRiskScore(avgTemp, avgHum, avgWind*3.6, totalRain/8, 50, 18);
-    const rlevel   = getRiskLevel(risk.total);
-    const dateObj  = new Date(date+'T12:00:00');
-    const dayName  = date===today?'Today':idx===0?'Today':dayNames[dateObj.getDay()];
-    const isProjEl = dailyMap[date]._projected ?
-      '<div style="font-size:8px;color:var(--text-muted);margin-top:3px;">~projected</div>' : '';
-
-    return `
-      <div class="forecast-card ${idx===0?'today':''}">
-        <div class="forecast-day">${dayName}</div>
-        <div class="forecast-icon">${weatherCodeToEmoji(wcode)}</div>
-        <div class="forecast-temp">${Math.round(formatTemp(maxTemp))}° / ${Math.round(formatTemp(minTemp))}°</div>
-        <div class="forecast-rain">💧 ${totalRain.toFixed(1)}mm</div>
-        <div class="forecast-risk-badge" style="color:${rlevel.color};background:${rlevel.color}18;border:1px solid ${rlevel.color}40;">${risk.total} ${rlevel.label}</div>
-        ${isProjEl}
-      </div>`;
-  }).join('');
-}
-
+  }
 // ═══════════════════════════════════════════════════════════════════════════
 // HOURLY RISK CHART
 // ═══════════════════════════════════════════════════════════════════════════
