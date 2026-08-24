@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0a1628">
-<meta name="description" content="MosquitoGuard - Research-backed mosquito risk assessment with real-time weather data">
+<meta name="description" content="MosquitoGuard - AI-powered mosquito risk assessment with real-time weather data">
 <title>MosquitoGuard — Mosquito Risk Calculator</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦟</text></svg>">
 <style>
@@ -249,15 +249,15 @@
   .weather-item .wi-bar { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 7px; overflow: hidden; }
   .weather-item .wi-bar-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
 
-  /* Environmental Insight */
-  .environmental-insight { position: relative; overflow: hidden; }
-  .environmental-insight::before {
+  /* AI Insight */
+  .ai-insight { position: relative; overflow: hidden; }
+  .ai-insight::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan));
     border-radius: var(--radius) var(--radius) 0 0;
   }
-  .environmental-insight-text { font-size: 13px; line-height: 1.7; color: var(--text-secondary); }
-  .environmental-insight-text strong { color: var(--text-primary); font-weight: 600; }
+  .ai-insight-text { font-size: 13px; line-height: 1.7; color: var(--text-secondary); }
+  .ai-insight-text strong { color: var(--text-primary); font-weight: 600; }
   .ai-typing { display: inline-block; width: 5px; height: 14px; background: var(--accent-blue); border-radius: 2px; animation: blink 0.8s infinite; vertical-align: middle; margin-left: 2px; }
   @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
 
@@ -584,7 +584,7 @@
 <div class="onboarding-overlay" id="onboarding">
   <div class="onboarding-icon" id="onb-icon">🦟</div>
   <div class="onboarding-title" id="onb-title">Welcome to MosquitoGuard</div>
-  <div class="onboarding-desc" id="onb-desc">Research-backed mosquito risk assessment using real-time weather data and research-backed models. Stay protected, stay informed.</div>
+  <div class="onboarding-desc" id="onb-desc">AI-powered mosquito risk assessment using real-time weather data and research-backed models. Stay protected, stay informed.</div>
   <div class="onboarding-dots">
     <div class="onboarding-dot active" id="dot-0"></div>
     <div class="onboarding-dot" id="dot-1"></div>
@@ -601,7 +601,7 @@
       <div class="header-logo">🦟</div>
       <div>
         <div class="header-title">MosquitoGuard</div>
-        <div class="header-subtitle">Environmental Risk Engine</div>
+        <div class="header-subtitle">AI Risk Engine</div>
       </div>
     </div>
     <div style="text-align:center;flex:1;">
@@ -696,12 +696,12 @@
       </div>
     </div>
 
-    <div class="card environmental-insight">
+    <div class="card ai-insight">
       <div class="card-header">
-        <span class="card-title"><span class="icon">🧠</span> Environmental Insight</span>
+        <span class="card-title"><span class="icon">🧠</span> AI Insight</span>
         <span class="card-badge" style="color:var(--accent-cyan);background:rgba(24,255,255,0.1);">Research-backed</span>
       </div>
-      <div class="environmental-insight-text" id="environmentalInsight">
+      <div class="ai-insight-text" id="aiInsight">
         Load live data to generate a research-backed mosquito risk analysis.<span class="ai-typing"></span>
       </div>
     </div>
@@ -845,7 +845,7 @@
       <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;">
         <strong>MosquitoGuard</strong><br>
         A free, open-source project by mohd Arshil.<br><br>
-        Powered by a research-backed environmental risk engine and real-time weather data from Open-Meteo to help you stay protected and informed.<br><br>
+        Powered by a research-backed AI mosquito risk engine and real-time weather data from Open-Meteo to help you stay protected and informed.<br><br>
         <span style="color:var(--text-muted);">Made in India 🇮🇳 by mohd Arshil</span>
       </div>
     </div>
@@ -925,7 +925,7 @@ const LOAD_STEPS = [
   'Fetching weather data...',
   'Running reverse geocoding...',
   'Computing VPD & risk model...',
-  'Projecting 30-day projection...',
+  'Projecting 30-day forecast...',
   'Rendering dashboard...',
   'Complete!'
 ];
@@ -974,7 +974,7 @@ function showLocBanner(title, sub) {
 const onboardingSteps = [
   { icon:'🦟', title:'Welcome to MosquitoGuard', desc:'Research-backed mosquito risk engine using real-time weather data.' },
   { icon:'📍', title:'Location Access', desc:'We use GPS to fetch hyper-local weather via Open-Meteo. Your location never leaves your device.' },
-  { icon:'🧠', title:'Smart Insights', desc:'24-hour risk curves, 7-day forecast and 30-day projection, and personalised protection tips.' }
+  { icon:'🧠', title:'Smart Insights', desc:'24-hour risk curves, 7 & 30-day forecasts, and personalised protection tips.' }
 ];
 let onbStep = 0;
 
@@ -1202,7 +1202,7 @@ function normalizeForecast7(om) {
   };
 }
 
-// Build a synthetic 30-day projection:
+// Build a synthetic 30-day forecast:
 function buildForecast30(om) {
   const base = normalizeForecast7(om).list;
   if (base.length === 0) return { list:[] };
@@ -1463,10 +1463,10 @@ function updateDashboard() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// ENVIRONMENTAL INSIGHT GENERATOR
+// AI INSIGHT GENERATOR
 // ═══════════════════════════════════════════════════════════════════════════
 function generateInsight(temp, humidity, wind, rain, score, level, hour, vpd, pressure) {
-  const el = document.getElementById('environmentalInsight');
+  const el = document.getElementById('aiInsight');
   let txt = '';
   const unit = isCelsius ? '°C' : '°F';
   const tStr = formatTemp(temp).toFixed(1) + unit;
@@ -1501,19 +1501,70 @@ function generateInsight(temp, humidity, wind, rain, score, level, hour, vpd, pr
     txt += `Low barometric pressure (${pressure} hPa) — storm imminent. Many species exhibit pre-storm feeding bursts. `;
 
   el.innerHTML=''; let i=0;
-
   function type() {
     if (i<txt.length) {
-      el.innerHTML=txt.substring(0,i+1)+'<span class="environmental-typing"></span>';
-      i+=4;
-      requestAnimationFrame(()=>setTimeout(type,8));
-    } else {
-      el.innerHTML=txt;
-    }
+      el.innerHTML=txt.substring(0,i+1)+'<span class="ai-typing"></span>';
+      i+=4; requestAnimationFrame(()=>setTimeout(type,8));
+    } else el.innerHTML=txt;
   }
-
   type();
-  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// FORECAST (7-DAY and 30-DAY)
+// ═══════════════════════════════════════════════════════════════════════════
+function setForecastRange(n) {
+  _forecastRange = n;
+  document.getElementById('fBtn7').classList.toggle('active',  n===7);
+  document.getElementById('fBtn30').classList.toggle('active', n===30);
+  document.getElementById('forecastCardTitle').textContent = n===7?'7-Day Forecast':'30-Day Forecast';
+  updateForecast();
+}
+
+function updateForecast() {
+  const container = document.getElementById('forecastScroll');
+  const src = _forecastRange === 30 ? (window._forecast30||forecastData) : forecastData;
+  if (!src||!src.list||src.list.length===0) return;
+
+  const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today    = new Date().toISOString().split('T')[0];
+
+  const dailyMap = {};
+  src.list.forEach(item => {
+    const date = item._date || item.dt_txt.split(' ')[0];
+    if (!dailyMap[date]) dailyMap[date] = { items:[], _projected: !!item._projected };
+    dailyMap[date].items.push(item);
+  });
+
+  const days = Object.keys(dailyMap).slice(0, _forecastRange);
+  container.innerHTML = days.map((date, idx) => {
+    const group = dailyMap[date].items;
+    const avgTemp  = group.reduce((s,d)=>s+d.main.temp,0)/group.length;
+    const maxTemp  = Math.max(...group.map(d=>d.main.temp_max||d.main.temp));
+    const minTemp  = Math.min(...group.map(d=>d.main.temp_min||d.main.temp));
+    const avgHum   = group.reduce((s,d)=>s+d.main.humidity,0)/group.length;
+    const avgWind  = group.reduce((s,d)=>s+d.wind.speed,0)/group.length;
+    const totalRain= group.reduce((s,d)=>s+(d.rain['3h']||0),0);
+    const wcode    = group[0]._weatherCode||0;
+    const risk     = calculateRiskScore(avgTemp, avgHum, avgWind*3.6, totalRain/8, 50, 18);
+    const rlevel   = getRiskLevel(risk.total);
+    const dateObj  = new Date(date+'T12:00:00');
+    const dayName  = date===today?'Today':idx===0?'Today':dayNames[dateObj.getDay()];
+    const isProjEl = dailyMap[date]._projected ?
+      '<div style="font-size:8px;color:var(--text-muted);margin-top:3px;">~projected</div>' : '';
+
+    return `
+      <div class="forecast-card ${idx===0?'today':''}">
+        <div class="forecast-day">${dayName}</div>
+        <div class="forecast-icon">${weatherCodeToEmoji(wcode)}</div>
+        <div class="forecast-temp">${Math.round(formatTemp(maxTemp))}° / ${Math.round(formatTemp(minTemp))}°</div>
+        <div class="forecast-rain">💧 ${totalRain.toFixed(1)}mm</div>
+        <div class="forecast-risk-badge" style="color:${rlevel.color};background:${rlevel.color}18;border:1px solid ${rlevel.color}40;">${risk.total} ${rlevel.label}</div>
+        ${isProjEl}
+      </div>`;
+  }).join('');
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // HOURLY RISK CHART
 // ═══════════════════════════════════════════════════════════════════════════
