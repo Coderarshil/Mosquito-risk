@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0a1628">
-<meta name="description" content="MosquitoGuard - AI-powered mosquito risk assessment with real-time weather data">
+<meta name="description" content="MosquitoGuard - Research-backed mosquito risk assessment with real-time weather data">
 <title>MosquitoGuard — Mosquito Risk Calculator</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦟</text></svg>">
 <style>
@@ -584,7 +584,7 @@
 <div class="onboarding-overlay" id="onboarding">
   <div class="onboarding-icon" id="onb-icon">🦟</div>
   <div class="onboarding-title" id="onb-title">Welcome to MosquitoGuard</div>
-  <div class="onboarding-desc" id="onb-desc">AI-powered mosquito risk assessment using real-time weather data and research-backed models. Stay protected, stay informed.</div>
+  <div class="onboarding-desc" id="onb-desc">Research-backed mosquito risk assessment using real-time weather data and research-backed models. Stay protected, stay informed.</div>
   <div class="onboarding-dots">
     <div class="onboarding-dot active" id="dot-0"></div>
     <div class="onboarding-dot" id="dot-1"></div>
@@ -601,7 +601,7 @@
       <div class="header-logo">🦟</div>
       <div>
         <div class="header-title">MosquitoGuard</div>
-        <div class="header-subtitle">AI Risk Engine</div>
+        <div class="header-subtitle">Environmental Risk Engine</div>
       </div>
     </div>
     <div style="text-align:center;flex:1;">
@@ -698,7 +698,7 @@
 
     <div class="card ai-insight">
       <div class="card-header">
-        <span class="card-title"><span class="icon">🧠</span> AI Insight</span>
+        <span class="card-title"><span class="icon">🧠</span> Environmental Insight</span>
         <span class="card-badge" style="color:var(--accent-cyan);background:rgba(24,255,255,0.1);">Research-backed</span>
       </div>
       <div class="ai-insight-text" id="aiInsight">
@@ -845,7 +845,7 @@
       <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;">
         <strong>MosquitoGuard</strong><br>
         A free, open-source project by mohd Arshil.<br><br>
-        Powered by a research-backed AI mosquito risk engine and real-time weather data from Open-Meteo to help you stay protected and informed.<br><br>
+        Powered by a research-backed environmental risk engine and real-time weather data from Open-Meteo to help you stay protected and informed.<br><br>
         <span style="color:var(--text-muted);">Made in India 🇮🇳 by mohd Arshil</span>
       </div>
     </div>
@@ -925,7 +925,7 @@ const LOAD_STEPS = [
   'Fetching weather data...',
   'Running reverse geocoding...',
   'Computing VPD & risk model...',
-  'Projecting 30-day forecast...',
+  'Generating 30-day projection...',
   'Rendering dashboard...',
   'Complete!'
 ];
@@ -974,7 +974,7 @@ function showLocBanner(title, sub) {
 const onboardingSteps = [
   { icon:'🦟', title:'Welcome to MosquitoGuard', desc:'Research-backed mosquito risk engine using real-time weather data.' },
   { icon:'📍', title:'Location Access', desc:'We use GPS to fetch hyper-local weather via Open-Meteo. Your location never leaves your device.' },
-  { icon:'🧠', title:'Smart Insights', desc:'24-hour risk curves, 7 & 30-day forecasts, and personalised protection tips.' }
+  { icon:'🧠', title:'Smart Insights', desc:'24-hour risk curves, 7-day forecast and 30-day projection, and personalised protection tips.' }
 ];
 let onbStep = 0;
 
@@ -1517,7 +1517,7 @@ function setForecastRange(n) {
   _forecastRange = n;
   document.getElementById('fBtn7').classList.toggle('active',  n===7);
   document.getElementById('fBtn30').classList.toggle('active', n===30);
-  document.getElementById('forecastCardTitle').textContent = n===7?'7-Day Forecast':'30-Day Forecast';
+  document.getElementById('forecastCardTitle').textContent = n===7?'7-Day Forecast':'30-Day Projection';
   updateForecast();
 }
 
